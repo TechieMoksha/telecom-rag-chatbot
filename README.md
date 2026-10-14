@@ -1,161 +1,140 @@
 # 📡 Telecom RAG Chatbot
 
-An AI-powered Telecom Customer Support Chatbot built using **Retrieval-Augmented Generation (RAG)**. The chatbot answers customer queries by retrieving relevant information from multiple knowledge sources, including FAQs, resolved support tickets, and a telecom user guide.
+An AI-powered telecom customer support chatbot built using **Retrieval-Augmented Generation (RAG)**. It answers customer queries by retrieving relevant information from FAQs, resolved support tickets, and a telecom user guide.
 
-This project was developed as part of my Generative AI learning journey by following the **Codebasics Agentic AI Crash Course**. I further enhanced the project by implementing additional features such as source citations, confidence-based fallback logic, retrieval evaluation, and a polished Streamlit interface.
+Developed as part of my Generative AI learning journey through the **Codebasics Agentic AI Crash Course**, this project was enhanced with source citations, confidence-based fallback logic, retrieval evaluation, and an interactive Streamlit interface.
 
----
+## 🚀 Live Demo
+<img width="943" height="390" alt="image" src="https://github.com/user-attachments/assets/78d74037-a194-4627-949f-419fcc0a5d61" />
 
-## 🚀 Features
+**[Try the Telecom RAG Chatbot →](https://telecom-rag-chatbot-8pqx6z8gfmicgm6tnxc87r.streamlit.app/)**
 
-- 🤖 AI-powered telecom customer support chatbot
+Explore the chatbot and test it with telecom-related customer support questions.
+
+## ✨ Features
+
+- 🤖 AI-powered telecom customer support
 - 📚 Retrieval-Augmented Generation (RAG)
 - 🔎 Semantic search using ChromaDB
-- 📄 Multi-source knowledge retrieval:
-  - FAQ Database
-  - Resolved Support Tickets
-  - Telecom User Guide (PDF)
-- 📖 Source citations in every response
+- 📄 Multi-source knowledge retrieval from FAQs, support tickets, and PDF documentation
+- 📖 Source citations in responses
 - ⚠️ Confidence-based fallback for low-confidence queries
 - 📊 Retrieval evaluation using Recall@3
-- 💬 Interactive Streamlit web application
-- ⚡ Fast inference using Groq-hosted Qwen3-32B
+- 💬 Interactive Streamlit interface
+- ⚡ Inference using Groq-hosted Qwen3-32B
 
----
+## 📸 Application Screenshots
+
+### Chatbot Interface
+
+![Telecom RAG Chatbot - Interface](images/Screenshot%20(51).png)
+
+### Chatbot Response and Source Retrieval
+
+![Telecom RAG Chatbot - Response](images/Screenshot%20(52).png)
 
 ## 🏗️ Project Architecture
 
 ```text
-                User Query
-                     │
-                     ▼
-           Streamlit Web Interface
-                     │
-                     ▼
-             Query Embedding
-                     │
-                     ▼
-         Chroma Vector Database
-      ┌──────────┬──────────┬──────────┐
-      │          │          │
-      ▼          ▼          ▼
-    FAQs      Tickets     PDF Guide
-      │          │          │
-      └──────────┴──────────┘
-                     │
-             Retrieved Context
-                     │
-                     ▼
+              User Query
+                   |
+                   v
+         Streamlit Web Interface
+                   |
+                   v
+            Query Embedding
+                   |
+                   v
+        ChromaDB Vector Database
+          /        |        \
+         v         v         v
+       FAQs     Tickets    PDF Guide
+          \        |        /
+                   |
+                   v
+           Retrieved Context
+                   |
+                   v
             Qwen3-32B (Groq)
-                     │
-                     ▼
-        Response with Source Citations
+                   |
+                   v
+       Response with Source Citations
 ```
-
----
 
 ## 🛠️ Tech Stack
 
-- Python
-- Streamlit
-- LangChain
-- ChromaDB
-- Hugging Face Embeddings
-- Sentence Transformers
-- Groq API
-- Qwen3-32B
-- Pandas
-- SQLite
-
----
+- **Language:** Python
+- **Frontend:** Streamlit
+- **LLM Framework:** LangChain
+- **Vector Database:** ChromaDB
+- **Embeddings:** Hugging Face Sentence Transformers
+- **LLM Inference:** Groq API, Qwen3-32B
+- **Data Storage:** SQLite, CSV
+- **Data Processing:** Pandas
 
 ## 📂 Knowledge Sources
 
-The chatbot retrieves information from three different sources:
+The chatbot retrieves information from three knowledge sources:
 
-- 📄 FAQ Dataset (CSV)
-- 🎫 Resolved Support Tickets (SQLite)
-- 📘 Telecom User Guide (PDF)
+- 📄 **FAQ Dataset:** CSV-based frequently asked questions
+- 🎫 **Resolved Support Tickets:** Historical support data stored in SQLite
+- 📘 **Telecom User Guide:** PDF documentation
 
-All documents are embedded using **Sentence Transformers** and stored in **ChromaDB** for semantic retrieval.
+The knowledge sources are converted into embeddings and stored in ChromaDB to support semantic search and context retrieval.
 
----
+## 🔧 Additional Enhancements
 
-## ✨ Additional Enhancements Implemented
+### Source Citations
+Responses include references to retrieved sources, such as FAQ IDs, ticket IDs, and guide page numbers, where applicable.
 
-### ✅ Source Citations
+### Confidence-Based Fallback
+Similarity scores are checked to identify low-confidence retrievals. When relevant information cannot be retrieved above the configured threshold, the chatbot returns a fallback response instead of generating an unsupported answer.
 
-Every response includes references to the retrieved source(s), such as:
+### Retrieval Evaluation
+A custom evaluation script tests retrieval performance using 10 handcrafted telecom queries.
 
-- FAQ ID
-- Ticket ID
-- Guide Page
-
----
-
-### ✅ Confidence-Based Fallback
-
-Implemented similarity score checking using ChromaDB.
-
-If no retrieved document exceeds the confidence threshold, the chatbot returns a fallback response instead of generating an unsupported answer.
-
----
-
-### ✅ Retrieval Evaluation
-
-Developed a retrieval evaluation script using **10 handcrafted telecom queries** to measure **Recall@3**.
-
-**Result**
+**Evaluation result:**
 
 ```text
 Recall@3 = 10/10 (100%)
 ```
 
----
+*Note: This result reflects the custom evaluation dataset and is not a guarantee of performance on unseen queries.*
 
-### ✅ User Interface Improvements
-
-- Interactive Streamlit dashboard
-- Sample question sidebar
+### User Interface Improvements
+- Interactive Streamlit interface
+- Sample questions in the sidebar
 - Conversation history
 - Response streaming
-- Loading indicator
-- Clean and responsive UI
+- Loading indicators
+- Clean, user-friendly layout
 
----
+## ⚙️ Installation and Setup
 
-## 📷 Demo
-
-
-Example:
-
-
-images\Screenshot (51).png
-images\Screenshot (52).png
-
----
-## ⚙️ Installation
-
-### Clone the repository
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/TechieMoksha/telecom-rag-chatbot
+git clone https://github.com/TechieMoksha/telecom-rag-chatbot.git
 cd telecom-rag-chatbot
 ```
 
-### Install dependencies
+### 2. Install dependencies
 
 ```bash
 uv sync
 ```
 
-### Create a `.env` file
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
 
 ```env
 GROQ_API_KEY=your_groq_api_key
 ```
 
-### Run the application
+Replace the placeholder with your Groq API key.
+
+### 4. Run the application
 
 ```bash
 uv run streamlit run app.py
@@ -163,30 +142,19 @@ uv run streamlit run app.py
 
 ## 🙏 Acknowledgements
 
-This project was built while following the **Agentic AI Crash Course** by **Dhaval Patel** from **Codebasics**.
+This project was developed while following the **Agentic AI Crash Course** by **Dhaval Patel and the Codebasics team**.
 
-I sincerely thank **Dhaval Patel** and the **Codebasics** team for creating practical, hands-on learning content on Generative AI and Agentic AI.
-
-In addition to the course project, I independently implemented the following enhancements:
-
-- Source citations
-- Confidence-based retrieval fallback
-- Retrieval evaluation (Recall@3)
-- Streamlit UI improvements
-
----
+I further enhanced the course project by implementing source citations, confidence-based retrieval fallback, Recall@3 evaluation, and UI improvements.
 
 ## 👩‍💻 Author
 
-**Mokshada Patil**
-
+**Mokshada Patil**  
 B.Tech in Data Science
 
-Passionate about Data Analytics, Machine Learning, Deep Learning, Generative AI, and Agentic AI.
+Interested in Data Analytics, Machine Learning, Generative AI, and building practical AI applications.
 
-- 💼 LinkedIn: https://www.linkedin.com/in/mokshada-patil-80132b2b0/
-- 💻 GitHub: https://github.com/TechieMoksha
+- 🚀 [Live Project Demo](https://telecom-rag-chatbot-8pqx6z8gfmicgm6tnxc87r.streamlit.app/)
 
 ---
 
-⭐ If you found this project interesting, feel free to star the repository!
+⭐ If you find this project interesting, consider starring the repository!
